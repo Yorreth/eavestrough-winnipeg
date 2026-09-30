@@ -348,6 +348,13 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 
   .article { padding-left: 20px; padding-right: 20px; }
   .article-back { margin-left: 0; }
+
+  /* Cost/comparison tables (material cost, lifespan, etc.) have more
+     columns than a phone screen can fit side by side. Scrolling the table
+     itself horizontally keeps it contained instead of stretching the whole
+     page — the fix applied on the fence site's cost table, now here too. */
+  .article-body table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .article-body th, .article-body td { white-space: nowrap; }
 }
 
 /* Safety net: whatever else runs wide on a phone (a long-content form
