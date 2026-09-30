@@ -60,4 +60,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://winnipegeavestrough.ca/blog/how-much-does-eavestrough-cleaning-cost-in-winnipeg.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
