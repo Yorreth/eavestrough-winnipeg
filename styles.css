@@ -345,6 +345,9 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   .mobile-cta-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; gap: 10px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: var(--white); border-top: 1px solid var(--line); z-index: 95; box-shadow: 0 -8px 24px -16px rgba(0,0,0,.2); }
   .mobile-cta-bar .btn { flex: 1; }
   body { padding-bottom: 78px; }
+
+  .article { padding-left: 20px; padding-right: 20px; }
+  .article-back { margin-left: 0; }
 }
 
 /* Safety net: whatever else runs wide on a phone (a long-content form
