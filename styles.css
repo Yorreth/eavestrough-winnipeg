@@ -88,32 +88,54 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .hero-trust svg { color: var(--accent); flex-shrink: 0; background: rgba(240,166,33,.15); border-radius: 999px; padding: 4px; width: 22px; height: 22px; }
 
 /* ---------- Quote card / multi-step form ---------- */
-.quote-card { background: var(--white); color: var(--ink); border-radius: 22px; padding: 32px; box-shadow: var(--shadow); }
+.quote-card { background: var(--white); color: var(--ink); border-radius: 22px; padding: 32px; box-shadow: var(--shadow); max-width: 100%; overflow: hidden; }
 .tilt { transition: transform .15s ease-out, box-shadow .2s ease; will-change: transform; }
 .form-progress { display: none; align-items: center; margin-bottom: 24px; }
 .js .form-progress { display: flex; }
 .step-dot { width: 30px; height: 30px; border-radius: 999px; background: var(--cream-2); color: var(--muted); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; transition: background .2s ease, color .2s ease; }
 .step-dot.active, .step-dot.completed { background: var(--accent); color: var(--white); }
-.step-line { flex: 1; height: 2px; background: var(--line); margin: 0 8px; }
+.step-line { flex: 1; height: 2px; background: var(--line); margin: 0 8px; min-width: 0; }
 
-.form-step { display: block; }
+.form-step { display: block; max-width: 100%; }
 .js .form-step:not(.active) { display: none; }
 .form-step h2 { font-size: 1.3rem; margin-bottom: 18px; }
 
 .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.service-option { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 16px 10px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--cream); font-weight: 600; font-size: 0.85rem; color: var(--navy-800); transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+.service-option { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 16px 10px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--cream); font-weight: 600; font-size: 0.85rem; color: var(--navy-800); transition: border-color .15s ease, background .15s ease, transform .15s ease; min-width: 0; }
 .service-option svg { width: 24px; height: 24px; color: var(--navy-700); }
 .service-option:hover { transform: translateY(-2px); border-color: var(--accent); }
 .service-option.selected { background: var(--navy-900); border-color: var(--navy-900); color: var(--white); }
 .service-option.selected svg { color: var(--accent); }
 
-.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; font-size: 0.85rem; font-weight: 600; color: var(--navy-800); }
-.field input, .field select, .field textarea { font: inherit; font-weight: 400; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--cream); color: var(--ink); }
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; font-size: 0.85rem; font-weight: 600; color: var(--navy-800); min-width: 0; }
+.field input, .field select, .field textarea {
+  font: inherit;
+  font-weight: 400;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--cream);
+  color: var(--ink);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
 .field textarea { resize: vertical; min-height: 70px; }
+/* native select needs its own dropdown arrow back since appearance is reset above */
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2357697a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 38px;
+}
 
-.form-nav { display: flex; gap: 12px; margin-top: 6px; }
-.form-nav .btn { flex: 1; }
+.form-nav { display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; }
+.form-nav .btn { flex: 1; min-width: 0; }
 .form-disclaimer { font-size: 0.75rem; color: var(--muted); margin-top: 14px; text-align: center; }
 
 .form-success { text-align: center; padding: 12px 0 4px; }
@@ -324,6 +346,11 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   .mobile-cta-bar .btn { flex: 1; }
   body { padding-bottom: 78px; }
 }
+
+/* Safety net: whatever else runs wide on a phone (a long-content form
+   element, a stray fixed-width block) should scroll inside itself, not
+   force the whole page wider than the viewport. */
+html, body { overflow-x: hidden; max-width: 100%; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
